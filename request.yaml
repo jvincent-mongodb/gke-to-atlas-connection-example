@@ -1,0 +1,23 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-request
+  labels:
+    app: test-request
+spec:
+  selector:
+    matchLabels:
+      api: test-request
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: test-request
+        api: test-request
+    spec:
+      containers:
+        - name: test-request
+          image: ubuntu:20.04
+          command: [ "/bin/bash", "-c", "--" ]
+          args: [ "while true; do sleep 30; done;" ]

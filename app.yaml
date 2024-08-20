@@ -1,0 +1,46 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app
+  labels:
+    app: app
+spec:
+  selector:
+    matchLabels:
+      api: app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: app
+        api: app
+    spec:
+      containers:
+        - name: app
+          image: jeffreyvincent143/gke-to-atlas-connection-example:latest
+          imagePullPolicy: Always
+          env:
+            - name: MONGO_PASSWORD
+              value: hBhJC837hWXHgNAs
+            - name: MONGO_USERNAME
+              value: jeff
+            - name: ATLAS_IP
+              value: cluster0.ncz2p.mongodb-dev.net
+          ports:
+            - name: app
+              containerPort: 8080
+              protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+      name: app
+  selector:
+    app: app
+  type: ClusterIP
