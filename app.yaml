@@ -22,11 +22,11 @@ spec:
           imagePullPolicy: Always
           env:
             - name: MONGO_PASSWORD
-              value: hBhJC837hWXHgNAs
+              value: <your-password>
             - name: MONGO_USERNAME
-              value: jeff
+              value: <your-username>
             - name: ATLAS_IP
-              value: cluster0.ncz2p.mongodb-dev.net
+              value: <your-atlas-address> # example: cluster0.abcd.mongodb.com
           ports:
             - name: app
               containerPort: 8080
